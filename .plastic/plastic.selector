@@ -1,0 +1,4 @@
+repository "Dr. Original Hamsphere@Stuuupidfish@cloud"
+  path "/"
+    br "/main"
+    co "/main"
