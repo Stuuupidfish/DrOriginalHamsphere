@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public bool gameOver = false;
 
+    public float jumpPower = 7f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,14 +32,26 @@ public class Player : MonoBehaviour
     }
  
     // Update is called once per frame
+   
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "jumpcheck")
+        {
+            grounded = true;
+        }
+
+    }
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "jumpcheck")
+        {
+            grounded = false;
+        }
+    }
+    //fixed update is called every physics update
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Z) == true)
-        // {
-        //    jumpKeyWasPressed = true;
-        // //    Debug.Log("Z was pressed");
-        // }
-
+        //Debug.Log(jumpKeyWasPressed);
         horizontalInput = Input.GetAxis("Horizontal") * 5f;
 
         if (playerHealth <= 0)
@@ -45,39 +59,23 @@ public class Player : MonoBehaviour
             gameOver = true;
             Debug.Log("YOU DIED");
         }
-
-    }
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "ground")
-        {
-            grounded = true;
-        }
-
-    }
-
-    //fixed update is called every physics update
-    void FixedUpdate()
-    {
-        //Debug.Log(jumpKeyWasPressed);
         rigidbodyComponent.velocity = new Vector2(horizontalInput, rigidbodyComponent.velocity.y);
         
         if (!grounded)
         {
-            //Debug.Log("DONT JUMP");
+            Debug.Log("DONT JUMP");
             return;
             
         }
-   
+        Debug.Log("Grounded is " + grounded);
 
     
         if (Input.GetKeyDown(KeyCode.Z) && grounded)
         {
-            float jumpPower = 7f;
 
+            Debug.Log("jumping");
             rigidbodyComponent.velocity = new Vector2(rigidbodyComponent.velocity.x, jumpPower);
-            // jumpKeyWasPressed = false;
-            grounded = false;
+            //jumpKeyWasPressed = false;
         }
 
     
