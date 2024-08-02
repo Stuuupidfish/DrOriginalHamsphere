@@ -6,8 +6,9 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 //using System.Numerics;
 using UnityEngine;
-
+/* MOVEMENT, TAKING DAMAGE */
 public class Player : MonoBehaviour
+
 //inherits from MonoBehaviour
 {
     [SerializeField] private LayerMask playerMask;
@@ -24,11 +25,14 @@ public class Player : MonoBehaviour
 
     public float jumpPower = 7f;
 
+    bool syringe;
+
+    public bool right;
     // Start is called before the first frame update
     void Start()
     {
         rigidbodyComponent = GetComponent<Rigidbody2D>();
-
+        syringe = false;
     }
  
     // Update is called once per frame
@@ -38,6 +42,12 @@ public class Player : MonoBehaviour
         if (col.gameObject.tag == "jumpcheck")
         {
             grounded = true;
+        } if (col.gameObject.layer == 6)
+        {
+            playerHealth -= 50;
+            //Destroy(other.gameObject);
+            rigidbodyComponent.AddForce(new Vector2(400, 400));
+            Debug.Log(playerHealth);
         }
 
     }
@@ -47,6 +57,7 @@ public class Player : MonoBehaviour
         {
             grounded = false;
         }
+
     }
     //fixed update is called every physics update
     void Update()
@@ -61,34 +72,41 @@ public class Player : MonoBehaviour
         }
         rigidbodyComponent.velocity = new Vector2(horizontalInput, rigidbodyComponent.velocity.y);
         
-        if (!grounded)
+        /* if (!grounded)
         {
-            Debug.Log("DONT JUMP");
+            // Debug.Log("DONT JUMP");
             return;
             
-        }
-        Debug.Log("Grounded is " + grounded);
+        }*/
+        // Debug.Log("Grounded is " + grounded);
 
     
         if (Input.GetKeyDown(KeyCode.Z) && grounded)
         {
 
-            Debug.Log("jumping");
+            // Debug.Log("jumping");
             rigidbodyComponent.velocity = new Vector2(rigidbodyComponent.velocity.x, jumpPower);
             //jumpKeyWasPressed = false;
         }
-
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (!syringe)
+            {
+                Debug.Log("Adding Syringe");
+                gameObject.AddComponent<Syringe>();
+                syringe = true;
+            } else if (syringe)
+            {
+                Destroy(GetComponent<Syringe>());
+                syringe = false;
+            }
+        }
     
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 6)
-        {
-            playerHealth -= 50;
-            //Destroy(other.gameObject);
-            Debug.Log(playerHealth);
-        }
+
     }
 
 
