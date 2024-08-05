@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         {
             playerHealth -= 50;
             //Destroy(other.gameObject);
-            rigidbodyComponent.AddForce(new Vector2(400, 400));
+           // rigidbodyComponent.AddForce(new Vector2(400, 400));
             Debug.Log(playerHealth);
         }
 
@@ -64,7 +64,14 @@ public class Player : MonoBehaviour
     {
         //Debug.Log(jumpKeyWasPressed);
         horizontalInput = Input.GetAxis("Horizontal") * 5f;
-
+        if (horizontalInput < 0)
+        {
+            right = false;
+        }
+        else if (horizontalInput > 0)
+        {
+            right = true;
+        }
         if (playerHealth <= 0)
         {
             gameOver = true;
@@ -103,10 +110,11 @@ public class Player : MonoBehaviour
         }
     
     }
-
-    void OnTriggerEnter2D(Collider2D other)
+    
+    public void kb (int dir)
     {
-
+        Debug.Log("Knockback");
+        rigidbodyComponent.AddForce(new Vector2(10000 * dir, 400));
     }
 
 
