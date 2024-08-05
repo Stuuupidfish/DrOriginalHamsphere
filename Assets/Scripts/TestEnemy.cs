@@ -14,6 +14,16 @@ public class TestEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (testEnemyHealth <= 0) {
+            Destroy(gameObject);
+        }
+    }
+    void OnCollisionEnter2D(Collision2D col) {
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "enemykill")
+        {
+            testEnemyHealth -= 2;
+            
+        }
     }
 }

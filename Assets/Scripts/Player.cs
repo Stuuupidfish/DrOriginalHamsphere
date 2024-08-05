@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
         if (playerHealth <= 0)
         {
             gameOver = true;
-            Debug.Log("YOU DIED");
+            // Debug.Log("YOU DIED");
         }
         rigidbodyComponent.velocity = new Vector2(horizontalInput, rigidbodyComponent.velocity.y);
         
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
     public void kb (int dir)
     {
         Debug.Log("Knockback");
-        rigidbodyComponent.AddForce(new Vector2(10000 * dir, 400));
+        rigidbodyComponent.AddForce(new Vector2(10000 * dir, 200));
     }
 
 

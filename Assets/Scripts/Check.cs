@@ -15,9 +15,8 @@ public class Check : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Hit");
-        if (col.gameObject.tag == "enemy") {
-            Debug.Log("Hit Enemy");
+        if (col.transform.tag == "enemy") {
+            
             player.GetComponent<Player>().kb(dir);
         }
     } 
