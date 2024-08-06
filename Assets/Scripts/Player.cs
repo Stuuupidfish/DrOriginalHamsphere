@@ -23,7 +23,15 @@ public class Player : MonoBehaviour
 
     public bool gameOver = false;
 
+    int scalpelCount;
+
     public float jumpPower = 7f;
+
+    [SerializeField] GameObject scalpel;
+
+    GameObject inScalpel;
+
+    Vector2 scalpelVector;
 
     bool syringe;
 
@@ -33,6 +41,7 @@ public class Player : MonoBehaviour
     {
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         syringe = false;
+        scalpelCount = 0;
     }
  
     // Update is called once per frame
@@ -76,6 +85,23 @@ public class Player : MonoBehaviour
         {
             gameOver = true;
             // Debug.Log("YOU DIED");
+        }
+        if (Input.GetKeyDown(KeyCode.X) && scalpelCount == 0)
+        {
+            if (!right) scalpelVector = new Vector2(gameObject.transform.position.x - gameObject.transform.localScale.x, gameObject.transform.position.y + 0.1f);
+            if (right) scalpelVector = new Vector2(gameObject.transform.position.x + gameObject.transform.localScale.x, gameObject.transform.position.y + 0.1f);
+            scalpelCount = 100;
+            inScalpel = Instantiate(scalpel, this.transform);
+            inScalpel.GetComponent<Transform>().position = scalpelVector;
+
+        }
+        if (scalpelCount == 50)
+        {
+            Destroy(inScalpel);
+        }
+        if (scalpelCount > 0)
+        {
+            scalpelCount--;
         }
         rigidbodyComponent.velocity = new Vector2(horizontalInput, rigidbodyComponent.velocity.y);
         
