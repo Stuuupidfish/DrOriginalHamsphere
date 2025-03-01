@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
 //inherits from MonoBehaviour
 {
-    [SerializeField] private LayerMask playerMask;
+/*    [SerializeField] private LayerMask playerMask;
     // private bool jumpKeyWasPressed;
     private float horizontalInput;
  
@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
             // Debug.Log("DONT JUMP");
             return;
             
-        }*/
+        }*\
         // Debug.Log("Grounded is " + grounded);
 
     
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
         Debug.Log("Knockback");
         rigidbodyComponent.AddForce(new Vector2(10000 * dir, 200));
     }
-
+*/
 
 }
 
