@@ -464,6 +464,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testEnemyHealth: 10
+--- !u!114 &972995573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972995566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc31a138af3c764583aef614c4c62a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 701844390}
+  speed: 1
 --- !u!1 &1144459488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1187,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2377516926888696310, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 972995570}
+    - targetCorrespondingSourceObject: {fileID: 2377516926888696310, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 972995573}
   m_SourcePrefab: {fileID: 100100000, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
 --- !u!1001 &8004789853138873487
 PrefabInstance:
