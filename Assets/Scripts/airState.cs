@@ -6,9 +6,9 @@ public class airState : State
 {
     private PlayerController player;
     bool jumping;
-    int jumps;
-    int oJumps;
-    public airState(PlayerController lPlayer, int lJumps) {
+    float jumps;
+    float oJumps;
+    public airState(PlayerController lPlayer, float lJumps) {
         player = lPlayer;
         oJumps = lJumps;
         //player.GetComponent<Rigidbody2D>().velocity = new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 10);
@@ -26,14 +26,17 @@ public class airState : State
         if (jumping && jumps > 0)
         {
             jumping = Input.GetKey(KeyCode.Z);
-            player.GetComponent<Rigidbody2D>().velocity =  new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 5);
-            jumps--;
+            player.GetComponent<Rigidbody2D>().velocity =  new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 10);
+            jumps -= 250*Time.deltaTime;
         }
         else {
             jumping = false;
             if (Input.GetKeyDown(KeyCode.Z)) {
                 player.jumpFrame = 90;
             }
+        }
+        if (player.GetComponent<Rigidbody2D>().velocity.y <= 0) {
+            jumps = 0;
         }
         if (player.ground) {
             player.machine.Transition(player.machine.idle);

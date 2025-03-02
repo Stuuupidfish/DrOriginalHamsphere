@@ -12,7 +12,7 @@ public class PlayerMachine
     public PlayerMachine(PlayerController player) {
         idle = new idleState(player);
         move = new moveState(player);
-        air = new airState(player,100);
+        air = new airState(player,50);
     }
 
     public void Init(State state) {

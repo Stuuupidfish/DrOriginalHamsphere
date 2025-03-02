@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public int speed;
     public bool ground;
     public int jumpForce;
-    public int jumpFrame = 0;
+    public float jumpFrame = 0;
     void Start() {
         machine = new PlayerMachine(this);
         rb2d =  GetComponent<Rigidbody2D>();
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
         machine.Update();
         transform.rotation = Quaternion.identity;
         if (jumpFrame > 0) {
-            jumpFrame--;        
+            jumpFrame -= 190*Time.fixedDeltaTime;        
         }
         if (((jumpFrame > 0 && Input.GetKey(KeyCode.Z)) || Input.GetKeyDown(KeyCode.Z)) && ground)
         {
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void move(float dir) {
-        rb2d.velocity = new Vector2(dir*1.0f*speed*Time.fixedDeltaTime, rb2d.velocity.y);
+        rb2d.velocity = new Vector2(dir*1.0f*speed, rb2d.velocity.y);
         
     }
     public void jump() {
