@@ -11,7 +11,7 @@ public class airState : State
     public airState(PlayerController lPlayer, int lJumps) {
         player = lPlayer;
         oJumps = lJumps;
-        player.GetComponent<Rigidbody2D>().velocity = new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 10);
+        //player.GetComponent<Rigidbody2D>().velocity = new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 10);
     }
     // Start is called before the first frame update
     public void Enter() {
