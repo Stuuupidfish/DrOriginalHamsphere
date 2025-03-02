@@ -26,7 +26,7 @@ public class airState : State
         if (jumping && jumps > 0)
         {
             jumping = Input.GetKey(KeyCode.Z);
-            player.GetComponent<Rigidbody2D>().velocity =  new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 10);
+            player.GetComponent<Rigidbody2D>().velocity =  new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 5);
             jumps--;
         }
         else {
