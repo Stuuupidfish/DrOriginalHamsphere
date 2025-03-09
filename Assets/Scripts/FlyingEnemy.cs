@@ -20,11 +20,18 @@ public class FlyingEnemy : AIChase
         Debug.Log(getDetection() + " subclass");
         if (getDetection() == true)
         {
+            setIsPacing(false);
             //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
             transform.GetComponent<Rigidbody2D>().velocity = new Vector2((float)Math.Cos(angle) * speed*(right?1:-1), (float)Math.Sin(angle) * speed * (right ? 1 : -1)); //alternate pathfinding method
         }
-        else {
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        else 
+        {
+            if (getIsPacing() == false)
+            {
+                updateIdleCenter();
+            }
+            setIsPacing(true);
+            idleMovement1();
         }
 
     }
