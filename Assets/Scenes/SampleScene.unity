@@ -323,6 +323,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 701844390}
   speed: 3
+--- !u!114 &650857353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650857343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8d3bd0f711d8c42acf08bf3347492a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &701844390
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +349,7 @@ GameObject:
   - component: {fileID: 701844391}
   - component: {fileID: 701844397}
   - component: {fileID: 701844396}
+  - component: {fileID: 701844398}
   m_Layer: 3
   m_Name: DrHamsphere
   m_TagString: Player
@@ -500,6 +514,20 @@ MonoBehaviour:
   ground: 0
   jumpForce: 1500
   jumpFrame: 0
+  hp: {fileID: 701844398}
+--- !u!114 &701844398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701844390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8d3bd0f711d8c42acf08bf3347492a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
 --- !u!4 &825638123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7684284251438353439, guid: ae04a065dc424694a9cf16f3c8476e8a, type: 3}
@@ -614,6 +642,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 701844390}
   speed: 3
+--- !u!114 &972995579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972995566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8d3bd0f711d8c42acf08bf3347492a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &1144459488
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 1934251368}
+  playerController: {fileID: 701844397}
 --- !u!1001 &1405484237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -989,6 +1031,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2377516926888696310, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 650857351}
+    - targetCorrespondingSourceObject: {fileID: 2377516926888696310, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 650857353}
   m_SourcePrefab: {fileID: 100100000, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
 --- !u!1 &1726166917
 GameObject:
@@ -1423,6 +1468,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2377516926888696310, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 972995577}
+    - targetCorrespondingSourceObject: {fileID: 2377516926888696310, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 972995579}
   m_SourcePrefab: {fileID: 100100000, guid: 3ead6284e3e8c23458d43393ae7f0fe6, type: 3}
 --- !u!1001 &8004789853138873487
 PrefabInstance:

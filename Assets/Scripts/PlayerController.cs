@@ -11,19 +11,23 @@ public class PlayerController : MonoBehaviour
     public bool ground;
     public int jumpForce;
     public float jumpFrame = 0;
+    public HealthClass hp;
+    
 
 //TRYING OUT C# GETTER AND SETTER STUFF
-    public static int health = 200;
-    public static int Health
-    {
-        get { return health; }
-        set { health = value; }
-    }
+    // public static int health = 200;
+    // public static int Health
+    // {
+    //     get { return health; }
+    //     set { health = value; }
+    // }
 
     void Start() {
         machine = new PlayerMachine(this);
         rb2d =  GetComponent<Rigidbody2D>();
         machine.Init(machine.idle);
+        hp.Health = 200;
+        Debug.Log(hp.Health);
     }
     void Update() {
         machine.Update();
@@ -49,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("enemy"))
         {
             Debug.Log("ouch");
-            PlayerController.Health -= 10;;
+            hp.takeDamage(10);
         }
     }
 }
