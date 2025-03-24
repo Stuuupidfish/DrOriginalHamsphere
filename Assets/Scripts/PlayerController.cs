@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,15 @@ public class PlayerController : MonoBehaviour
     public bool ground;
     public int jumpForce;
     public float jumpFrame = 0;
+
+//TRYING OUT C# GETTER AND SETTER STUFF
+    public static int health = 200;
+    public static int Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
+
     void Start() {
         machine = new PlayerMachine(this);
         rb2d =  GetComponent<Rigidbody2D>();
@@ -33,5 +43,13 @@ public class PlayerController : MonoBehaviour
     }
     public void jump() {
         rb2d.AddForce(new Vector2(0, jumpForce));
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            Debug.Log("ouch");
+            PlayerController.Health -= 10;;
+        }
     }
 }
