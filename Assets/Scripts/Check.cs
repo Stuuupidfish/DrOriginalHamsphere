@@ -18,7 +18,7 @@ public class Check : MonoBehaviour
         if (col.transform.tag == "ground") {
 
             transform.parent.GetComponent<PlayerController>().ground = true;
-            Debug.Log("grounded");
+            //Debug.Log("grounded");
         }
     }
     void OnCollisionExit2D(Collision2D col)
@@ -27,7 +27,7 @@ public class Check : MonoBehaviour
         {
 
             transform.parent.GetComponent<PlayerController>().ground = false;
-            Debug.Log("Ungrounded");
+            //D//ebug.Log("Ungrounded");
         }
     }
 

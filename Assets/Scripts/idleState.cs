@@ -11,7 +11,7 @@ public class idleState : State
     }
 
     public void Enter() {
-        Debug.Log("Enter idle state");
+        //Debug.Log("Enter idle state");
 
 
     }
@@ -21,6 +21,6 @@ public class idleState : State
         }
     }
     public void Exit() {
-        Debug.Log("Bye");
+        //Debug.Log("Bye");
     }
 }

@@ -17,7 +17,7 @@ public class FlyingEnemy : AIChase
         detectPlayer();
         double angle = (float)Math.Atan(getDirection().y / getDirection().x);
         bool right = transform.position.x < player.transform.position.x;
-        Debug.Log(getDetection() + " subclass");
+       // Debug.Log(getDetection() + " subclass");
         if (getDetection() == true)
         {
             setIsPacing(false);

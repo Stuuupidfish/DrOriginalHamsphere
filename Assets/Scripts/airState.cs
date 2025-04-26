@@ -44,6 +44,6 @@ public class airState : State
     }
 
     public void Exit() {
-        Debug.Log("Exit air");
+        
     }
 }

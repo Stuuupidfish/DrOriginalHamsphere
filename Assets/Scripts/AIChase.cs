@@ -41,7 +41,7 @@ public class AIChase : MonoBehaviour
             detected = false;
         }
 
-        Debug.Log(getDetection() + " masterclass");
+        //Debug.Log(getDetection() + " masterclass");
     }
     public bool getDetection()
     {

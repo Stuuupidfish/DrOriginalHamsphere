@@ -23,7 +23,7 @@ public class TestEnemy : MonoBehaviour
         if (col.gameObject.tag == "enemykill")
         {
             testEnemyHealth -= 2;
-            
+            Debug.Log("Hit enemy");
         }
     }
 }

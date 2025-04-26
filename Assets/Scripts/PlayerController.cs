@@ -12,9 +12,14 @@ public class PlayerController : MonoBehaviour
     public int jumpForce;
     public float jumpFrame = 0;
     public HealthClass hp;
-    
+    public bool canTurn;
+    bool canHit;
+    public int 
+    public GameObject scalpel;
+    public float direction;
+    int scalpelCooldown;
 
-//TRYING OUT C# GETTER AND SETTER STUFF
+    //TRYING OUT C# GETTER AND SETTER STUFF
     // public static int health = 200;
     // public static int Health
     // {
@@ -28,6 +33,9 @@ public class PlayerController : MonoBehaviour
         machine.Init(machine.idle);
         hp.Health = 200;
         Debug.Log(hp.Health);
+        canTurn = true;
+        direction = 1;
+        scalpelCooldown = 200;
     }
     void Update() {
         machine.Update();
@@ -40,10 +48,29 @@ public class PlayerController : MonoBehaviour
             ground = false;
             machine.Transition(machine.air);
         }
+        if (Input.GetKeyDown(KeyCode.X) && canTurn)
+        {
+            Instantiate(scalpel, this.transform);
+            canTurn = false;
+            canHit = false;
+        }
     }
     public void move(float dir) {
-        rb2d.velocity = new Vector2(dir*1.0f*speed, rb2d.velocity.y);
-        
+        if (canTurn)
+        {
+            rb2d.velocity = new Vector2(dir * 1.0f * speed, rb2d.velocity.y);
+            Vector3 newScale = transform.localScale;
+
+            if (canTurn)
+            {
+                newScale.x *= (dir < -0.5f || dir > 0.5f) ? dir * (newScale.x / Math.Abs(newScale.x)) : 1.0f; // gets flattened
+                if (Math.Abs(dir) > .5)
+                {
+                    direction = dir;
+                }
+                transform.localScale = newScale;
+            }
+        }
     }
     public void jump() {
         rb2d.AddForce(new Vector2(0, jumpForce));
@@ -52,8 +79,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
-            Debug.Log("ouch");
             hp.takeDamage(10);
+            int dir = rb2d.position.x < collision.gameObject.GetComponent<Rigidbody2D>().position.x ? -1 : 1;
+            rb2d.AddForce(new Vector2(750 * dir, 300));
         }
     }
 }
