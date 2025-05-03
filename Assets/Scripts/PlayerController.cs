@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     public HealthClass hp;
     public bool canTurn;
     bool canHit;
-    public int 
     public GameObject scalpel;
     public float direction;
     int scalpelCooldown;
