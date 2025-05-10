@@ -18,7 +18,8 @@ public class moveState : State
 
     }
     public void Update()
-    {
+    {   
+    
         int i = (int)Input.GetAxisRaw("Horizontal");
         player.move(i);
         if (Input.GetAxisRaw("Horizontal") == 0) {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float jumpFrame = 0;
     public HealthClass hp;
     public bool canTurn;
+    private bool canMove = true;
     bool canHit;
     public GameObject scalpel;
     public float direction;
@@ -30,8 +32,10 @@ public class PlayerController : MonoBehaviour
         machine = new PlayerMachine(this);
         rb2d =  GetComponent<Rigidbody2D>();
         machine.Init(machine.idle);
+
         hp.Health = 200;
         Debug.Log(hp.Health);
+
         canTurn = true;
         direction = 1;
         scalpelCooldown = 200;
@@ -53,9 +57,31 @@ public class PlayerController : MonoBehaviour
             canTurn = false;
             canHit = false;
         }
+
+        canMove = !Input.GetKey(KeyCode.C);
+        if (!canMove && ground)
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        }
+        
+        if (hp.Invincible)
+        {
+            hp.iFrames();
+            //if u want overlap during i frames 
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+            GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+        else
+        {
+            //if u want overlap during i frames
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        
+        
     }
     public void move(float dir) {
-        if (canTurn)
+        if (canMove && canTurn)
         {
             rb2d.velocity = new Vector2(dir * 1.0f * speed, rb2d.velocity.y);
             Vector3 newScale = transform.localScale;
@@ -78,9 +104,20 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
-            hp.takeDamage(10);
-            int dir = rb2d.position.x < collision.gameObject.GetComponent<Rigidbody2D>().position.x ? -1 : 1;
-            rb2d.AddForce(new Vector2(750 * dir, 300));
+            if (!hp.Invincible)
+            {
+                hp.takeDamage(10);
+                int dir = rb2d.position.x < collision.gameObject.GetComponent<Rigidbody2D>().position.x ? -1 : 1;
+                rb2d.AddForce(new Vector2(750 * dir, 300));
+
+                Debug.Log("turn on iFrames");
+                hp.ITime = hp.MaxIframes;
+                hp.Invincible = true;
+                
+            }
+            
         }
     }
+
+    
 }

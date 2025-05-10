@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class SceneChange : MonoBehaviour
 {
-    public void SwitchScene()
+
+    public void SwitchSceneStomach()
     {
         SceneManager.LoadScene("Stomach");
     }
+    public void quit()
+    {
+        Application.Quit();
+    }
     // Start is called before the first frame update
+    public void load()
+    {
+        //NOT DONE
+    }
     void Start()
     {
         

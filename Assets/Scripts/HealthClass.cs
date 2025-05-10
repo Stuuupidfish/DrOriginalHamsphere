@@ -4,11 +4,29 @@ using UnityEngine;
 
 public class HealthClass : MonoBehaviour
 {
-    public int health;
+    private int health;
     public int Health
     {
         get { return health; }
         set { health = value; }
+    }
+    private bool invincible = false;
+    public bool Invincible
+    {
+        get {return invincible;}
+        set {invincible = value;}
+    }
+    private float iTime = 0f;
+    public float ITime
+    {
+        get {return iTime;}
+        set {iTime = value;}
+    }
+    private float maxIframes = 1f;
+    public float MaxIframes
+    {
+        get{return maxIframes;}
+        set{maxIframes = value;}
     }
     public void takeDamage(int damageAmount)
     {
@@ -28,6 +46,7 @@ public class HealthClass : MonoBehaviour
     {
         health += healAmount;
     }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +56,16 @@ public class HealthClass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
+    }
+    
+    public void iFrames()
+    {
+        iTime -= Time.deltaTime;
+        if (iTime <= 0) 
+        {
+            invincible = false;
+            Debug.Log("Turn off iFrames");
+        }
     }
 }
