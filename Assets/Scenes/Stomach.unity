@@ -1922,6 +1922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2682731165064224835, guid: 48e6e0b24bee095478a2ca2b41e52fa2, type: 3}
+  player: {fileID: 701844397}
 --- !u!70 &701844400
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

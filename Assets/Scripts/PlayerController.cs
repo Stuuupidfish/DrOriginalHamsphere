@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public PlayerMachine machine;
-    public int speed;
+    public int speed = 5;
     public bool ground;
     public int jumpForce;
     public float jumpFrame = 0;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject scalpel;
     public float direction;
     int scalpelCooldown;
-
+    
     //TRYING OUT C# GETTER AND SETTER STUFF
     // public static int health = 200;
     // public static int Health
@@ -40,7 +40,20 @@ public class PlayerController : MonoBehaviour
         direction = 1;
         scalpelCooldown = 200;
     }
+    public Vector2 currentVelocity()
+    {
+        return rb2d.velocity;
+    }
     void Update() {
+        if (Input.GetKeyDown(KeyCode.LeftShift)  || Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 10;
+        }
+        else
+        {
+            speed = 5;
+        }
+
         machine.Update();
         transform.rotation = Quaternion.identity;
         if (jumpFrame > 0) {
@@ -57,7 +70,7 @@ public class PlayerController : MonoBehaviour
             canTurn = false;
             canHit = false;
         }
-
+        
         canMove = !Input.GetKey(KeyCode.C);
         if (!canMove && ground)
         {
