@@ -15,11 +15,13 @@ public class Scalpel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.parent.GetComponent<PlayerController>().canHit = false;
         if (transform.localScale.x > 1.0 || transform.localScale.x < -1.0) {
             increasing = transform.localScale.x > 1.0?-1:1;
         }
-        if (transform.localScale.x < 0 ) {
+        if (transform.localScale.x <= 0) {
             transform.parent.GetComponent<PlayerController>().canTurn = true;
+            transform.parent.GetComponent<PlayerController>().canHit = true;
             Destroy(gameObject);
         }
         transform.localScale = new Vector2(.05f * increasing + transform.localScale.x, .025f * increasing + transform.localScale.y);

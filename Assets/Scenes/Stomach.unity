@@ -1895,6 +1895,7 @@ MonoBehaviour:
   jumpFrame: 0
   hp: {fileID: 701844398}
   canTurn: 0
+  canHit: 0
   scalpel: {fileID: 3507220473948545926, guid: 971e7374b046d2e4f9f0f1bb9f5d71b3, type: 3}
   direction: 0
 --- !u!114 &701844398
@@ -3361,7 +3362,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1178241486}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3d11873e075b6864397c0d3aa1f6d74d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3406,7 +3407,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1178241486}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3d11873e075b6864397c0d3aa1f6d74d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4899,6 +4900,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8758788073725980674, guid: ae04a065dc424694a9cf16f3c8476e8a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 3d11873e075b6864397c0d3aa1f6d74d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5683,7 +5688,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3d11873e075b6864397c0d3aa1f6d74d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

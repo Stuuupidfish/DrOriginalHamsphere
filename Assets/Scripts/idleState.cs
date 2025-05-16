@@ -13,7 +13,6 @@ public class idleState : State
     public void Enter() {
         //Debug.Log("Enter idle state");
 
-
     }
     public void Update() {
         if (Input.GetAxisRaw("Horizontal") != 0) {

@@ -18,7 +18,9 @@ public class GroundedEnemy : AIChase
         {
             setIsPacing(false);
             bool right = transform.position.x < player.transform.position.x;
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(speed*(right?1:-1), 0); //alternate pathfinding method
+            if (GetComponent<TestEnemy>().changeVel <= 0) { 
+            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(speed * (right ? 1 : -1), 0); //alternate pathfinding method
+        }
         }
         else 
         {

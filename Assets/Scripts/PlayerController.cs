@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
+// IN ORDER OF IMPORTANCE:
+// FIX WALL STICKING [done yippee]
+// FIX SCALPEL AND BULLETS AT SAME TIME [done yippee
+// FIX STOPPING DURING SCALPEL [ok so now theres a chance that hamsphere will start sliding]
+// ADD SCALPEL DIRECTIONS
+// CREATE STOMACH BUG
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
@@ -15,8 +21,8 @@ public class PlayerController : MonoBehaviour
     public HealthClass hp;
     public bool canTurn;
     private bool canMove = true;
-    bool canHit;
-    public GameObject scalpel;
+    public bool canHit;
+    public GameObject scalpel; // set cooldown after bullets, until scalpel can hit again
     public float direction;
     int scalpelCooldown;
     
@@ -35,10 +41,11 @@ public class PlayerController : MonoBehaviour
 
         hp.Health = 200;
         Debug.Log(hp.Health);
-
+        canHit = true;
         canTurn = true;
         direction = 1;
         scalpelCooldown = 200;
+        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), scalpel.GetComponent<BoxCollider2D>());
     }
     public Vector2 currentVelocity()
     {

@@ -22,7 +22,10 @@ public class FlyingEnemy : AIChase
         {
             setIsPacing(false);
             //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2((float)Math.Cos(angle) * speed*(right?1:-1), (float)Math.Sin(angle) * speed * (right ? 1 : -1)); //alternate pathfinding method
+            if (GetComponent<TestEnemy>().changeVel <= 0)
+            {
+                transform.GetComponent<Rigidbody2D>().velocity = new Vector2((float)Math.Cos(angle) * speed * (right ? 1 : -1), (float)Math.Sin(angle) * speed * (right ? 1 : -1)); //alternate pathfinding method
+            }
         }
         else 
         {

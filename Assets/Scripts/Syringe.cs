@@ -32,8 +32,9 @@ public class Syringe : MonoBehaviour
             shootDirection = new Vector2(GetComponent<PlayerController>().direction, 0);
 
         //Debug.Log(GetComponent<PlayerController>().direction);
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && player.canHit)
         {
+
             shootDirection.Normalize(); // Normalize to prevent faster diagonal shots
             GameObject b = Instantiate(bullet, transform.position + (Vector3)(shootDirection * 0.7f), Quaternion.identity);
             Rigidbody2D rb = b.GetComponent<Rigidbody2D>();
