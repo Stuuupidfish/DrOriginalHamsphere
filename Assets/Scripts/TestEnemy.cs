@@ -5,38 +5,50 @@ using UnityEngine;
 
 public class TestEnemy : MonoBehaviour
 {
-    public int testEnemyHealth = 10;
-    public int changeVel;
-    [SerializeField] Rigidbody2D player; 
+    //public int testEnemyHealth = 10;
+    public int enemyHealth;
+    private HealthClass hp;
+    public float changeVel;
+    [SerializeField] Rigidbody2D player;
     // Start is called before the first frame update
     void Start()
     {
-        int changeVel;
+        hp = GetComponent<HealthClass>();
+        hp.Health = enemyHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (testEnemyHealth <= 0) {
+        //Debug.Log(hp.Health);
+        if (hp.Health <= 0)
+        {
             Destroy(gameObject);
         }
         if (changeVel >= 0)
         {
-            changeVel--;
+            changeVel -= Time.deltaTime;
 
         }
+
+        
     }
+    
     void OnCollisionEnter2D(Collision2D col) {
         Debug.Log(col.gameObject.tag);
-        if (col.gameObject.tag == "enemykill")
+        if (col.gameObject.tag == "enemykill" || col.gameObject.tag == "scalpel")
         {
-            testEnemyHealth -= 2;
-            Debug.Log("Hit enemy");
-            changeVel = 200;
-            if (col.gameObject.GetComponent<Transform>().position.x != GetComponent<Transform>().position.x)
+            hp.takeDamage(2);
+            //Debug.Log("Hit enemy");
+
+            if (col.gameObject.tag == "scalpel")
             {
-                float dir = Math.Abs(GetComponent<Transform>().position.x - col.gameObject.GetComponent<Transform>().position.x) / (GetComponent<Transform>().position.x - col.gameObject.GetComponent<Transform>().position.x);
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 500, 0));
+                changeVel = 1.5f;
+                //float dir = Math.Abs(GetComponent<Transform>().position.x - col.gameObject.GetComponent<Transform>().position.x) / (GetComponent<Transform>().position.x - col.gameObject.GetComponent<Transform>().position.x);
+                float dir = GetComponent<Transform>().position.x > col.gameObject.GetComponent<Transform>().position.x ? 1 : -1;
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 500, 500));
+                Debug.Log("knockback");
+                
                 //player.AddForce(new Vector2(dir * -1 * 500, 0));
             }
         }

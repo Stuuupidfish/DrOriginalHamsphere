@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4495021494564627425}
   m_Layer: 3
   m_Name: scalpel
-  m_TagString: enemykill
+  m_TagString: scalpel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

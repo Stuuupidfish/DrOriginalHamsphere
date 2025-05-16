@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class HealthClass : MonoBehaviour
 {
+    //bad code but whatever just be aware of health vs Health
     private int health;
     public int Health
     {
         get { return health; }
         set { health = value; }
     }
+
     private bool invincible = false;
     public bool Invincible
     {
@@ -56,7 +58,7 @@ public class HealthClass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        
     }
     
     public void iFrames()

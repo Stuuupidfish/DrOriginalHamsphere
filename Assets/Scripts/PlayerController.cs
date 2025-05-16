@@ -25,18 +25,13 @@ public class PlayerController : MonoBehaviour
     public GameObject scalpel; // set cooldown after bullets, until scalpel can hit again
     public float direction;
     int scalpelCooldown;
-    
-    //TRYING OUT C# GETTER AND SETTER STUFF
-    // public static int health = 200;
-    // public static int Health
-    // {
-    //     get { return health; }
-    //     set { health = value; }
-    // }
 
-    void Start() {
+
+
+    void Start()
+    {
         machine = new PlayerMachine(this);
-        rb2d =  GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
         machine.Init(machine.idle);
 
         hp.Health = 200;
@@ -46,6 +41,7 @@ public class PlayerController : MonoBehaviour
         direction = 1;
         scalpelCooldown = 200;
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), scalpel.GetComponent<BoxCollider2D>());
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
     }
     public Vector2 currentVelocity()
     {
@@ -101,20 +97,17 @@ public class PlayerController : MonoBehaviour
         
     }
     public void move(float dir) {
-        if (canMove && canTurn)
+        if (canMove)
         {
             rb2d.velocity = new Vector2(dir * 1.0f * speed, rb2d.velocity.y);
             Vector3 newScale = transform.localScale;
 
-            if (canTurn)
-            {
                 newScale.x *= (dir < -0.5f || dir > 0.5f) ? dir * (newScale.x / Math.Abs(newScale.x)) : 1.0f; // gets flattened
                 if (Math.Abs(dir) > .5)
                 {
                     direction = dir;
                 }
                 transform.localScale = newScale;
-            }
         }
     }
     public void jump() {
@@ -126,11 +119,13 @@ public class PlayerController : MonoBehaviour
         {
             if (!hp.Invincible)
             {
+                //fix
                 hp.takeDamage(10);
+                //fix ^
                 int dir = rb2d.position.x < collision.gameObject.GetComponent<Rigidbody2D>().position.x ? -1 : 1;
-                rb2d.AddForce(new Vector2(750 * dir, 300));
+                rb2d.AddForce(new Vector2(500 * dir, 500));
 
-                Debug.Log("turn on iFrames");
+                //Debug.Log("turn on iFrames");
                 hp.ITime = hp.MaxIframes;
                 hp.Invincible = true;
                 
