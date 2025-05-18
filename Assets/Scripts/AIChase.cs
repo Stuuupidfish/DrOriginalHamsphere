@@ -56,7 +56,7 @@ public class AIChase : MonoBehaviour
         if (movingRight)
         {
             // Move right
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
+            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, transform.GetComponent<Rigidbody2D>().velocity.y);
             
             // If the enemy reaches the maximum range, change direction
             if (transform.position.x >= idleCenter + paceRange)
@@ -67,7 +67,7 @@ public class AIChase : MonoBehaviour
         else
         {
             // Move left
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, 0);
+            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, transform.GetComponent<Rigidbody2D>().velocity.y);
             
             // If the enemy reaches the minimum range, change direction
             if (transform.position.x <= idleCenter - paceRange)

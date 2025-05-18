@@ -43,10 +43,10 @@ public class TestEnemy : MonoBehaviour
 
             if (col.gameObject.tag == "scalpel")
             {
-                changeVel = 1.5f;
+                changeVel = 0.1f;
                 //float dir = Math.Abs(GetComponent<Transform>().position.x - col.gameObject.GetComponent<Transform>().position.x) / (GetComponent<Transform>().position.x - col.gameObject.GetComponent<Transform>().position.x);
                 float dir = GetComponent<Transform>().position.x > col.gameObject.GetComponent<Transform>().position.x ? 1 : -1;
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 500, 500));
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 1000, 0));
                 Debug.Log("knockback");
                 
                 //player.AddForce(new Vector2(dir * -1 * 500, 0));

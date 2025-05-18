@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6270294878995613765}
   - component: {fileID: 8645358523108083423}
   - component: {fileID: 4495021494564627425}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: scalpel
   m_TagString: scalpel
   m_Icon: {fileID: 0}

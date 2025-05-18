@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 163457375107489006}
   - component: {fileID: 4715085707196413487}
   - component: {fileID: 3578412492751027588}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: bulletJuice
   m_TagString: enemykill
   m_Icon: {fileID: 0}

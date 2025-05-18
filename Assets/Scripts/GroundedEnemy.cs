@@ -15,7 +15,7 @@ public class GroundedEnemy : AIChase
     void Update()
     {
         detectPlayer();
-        if (getDetection() == true )
+        if (getDetection() == true || !isGrounded)
         {
             setIsPacing(false);
             if (isGrounded)
