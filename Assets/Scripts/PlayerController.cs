@@ -40,7 +40,9 @@ public class PlayerController : MonoBehaviour
         canTurn = true;
         direction = 1;
         scalpelCooldown = 200;
-        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), scalpel.GetComponent<BoxCollider2D>());
+        //Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), scalpel.GetComponent<BoxCollider2D>());
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Weapon"), true);
         //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
     }
     public Vector2 currentVelocity()
