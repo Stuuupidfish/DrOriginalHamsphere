@@ -7,6 +7,7 @@ public class Scalpel : MonoBehaviour
     int increasing;
     public GameObject player;
     Vector2 scalpelDirection;
+    //public PlayerController player;
     //public int direction;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class Scalpel : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
             scalpelDirection.x -= 1;
         if (scalpelDirection.x == 0 && scalpelDirection.y == 0)
-            scalpelDirection = new Vector2(GetComponent<PlayerController>().direction, 0);
+            //scalpelDirection = new Vector2(GetComponent<PlayerController>().direction, 0);
 
         // up arrow +90, down arrow -90
         if (scalpelDirection.y == 1)
