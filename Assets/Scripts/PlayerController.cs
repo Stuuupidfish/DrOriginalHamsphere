@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public int jumpForce;
     public float jumpFrame = 0;
     public HealthClass hp;
+    public int maxHealth;
     public bool canTurn;
     private bool canMove = true;
     public bool canHit;
@@ -26,15 +27,15 @@ public class PlayerController : MonoBehaviour
     public float direction;
     int scalpelCooldown;
 
-
-
-    void Start()
+     void Start()
     {
+
+
         machine = new PlayerMachine(this);
         rb2d = GetComponent<Rigidbody2D>();
         machine.Init(machine.idle);
 
-        hp.Health = 200;
+        hp.Health = maxHealth;
         Debug.Log(hp.Health);
         canHit = true;
         canTurn = true;
@@ -49,8 +50,9 @@ public class PlayerController : MonoBehaviour
     {
         return rb2d.velocity;
     }
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.LeftShift)  || Input.GetKey(KeyCode.LeftShift))
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
             speed = 10;
         }
@@ -61,8 +63,9 @@ public class PlayerController : MonoBehaviour
 
         machine.Update();
         transform.rotation = Quaternion.identity;
-        if (jumpFrame > 0) {
-            jumpFrame -= 190*Time.fixedDeltaTime;        
+        if (jumpFrame > 0)
+        {
+            jumpFrame -= 190 * Time.fixedDeltaTime;
         }
         if (((jumpFrame > 0 && Input.GetKey(KeyCode.Z)) || Input.GetKeyDown(KeyCode.Z)) && ground)
         {
@@ -75,44 +78,58 @@ public class PlayerController : MonoBehaviour
             canTurn = false;
             canHit = false;
         }
-        
+
         canMove = !Input.GetKey(KeyCode.C);
         if (!canMove && ground)
         {
             rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
-        
+
+        if (hp.ITime >= 0.5 * hp.MaxIframes)
+        {
+            canMove = false;
+        }
+        else
+        {
+            canMove = true;
+        }
+
         if (hp.Invincible)
         {
             hp.iFrames();
             //if u want overlap during i frames 
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
             GetComponent<SpriteRenderer>().color = Color.blue;
+
         }
         else
         {
             //if u want overlap during i frames
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
             GetComponent<SpriteRenderer>().color = Color.white;
+
         }
         
-        
+
+
     }
-    public void move(float dir) {
+    public void move(float dir)
+    {
         if (canMove)
         {
             rb2d.velocity = new Vector2(dir * 1.0f * speed, rb2d.velocity.y);
             Vector3 newScale = transform.localScale;
 
-                newScale.x *= (dir < -0.5f || dir > 0.5f) ? dir * (newScale.x / Math.Abs(newScale.x)) : 1.0f; // gets flattened
-                if (Math.Abs(dir) > .5)
-                {
-                    direction = dir;
-                }
-                transform.localScale = newScale;
+            newScale.x *= (dir < -0.5f || dir > 0.5f) ? dir * (newScale.x / Math.Abs(newScale.x)) : 1.0f; // gets flattened
+            if (Math.Abs(dir) > .5)
+            {
+                direction = dir;
+            }
+            transform.localScale = newScale;
         }
     }
-    public void jump() {
+    public void jump()
+    {
         rb2d.AddForce(new Vector2(0, jumpForce));
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -122,19 +139,21 @@ public class PlayerController : MonoBehaviour
             if (!hp.Invincible)
             {
                 //fix
+            
+                 //Debug.Log("turn on iFrames");
+                hp.ITime = hp.MaxIframes;
+                hp.Invincible = true;
                 hp.takeDamage(10);
                 //fix ^
                 int dir = rb2d.position.x < collision.gameObject.GetComponent<Rigidbody2D>().position.x ? -1 : 1;
-                rb2d.AddForce(new Vector2(500 * dir, 500));
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                rb2d.AddForce(new Vector2(700 * dir, 1000));
 
-                //Debug.Log("turn on iFrames");
-                hp.ITime = hp.MaxIframes;
-                hp.Invincible = true;
                 
             }
-            
+
         }
     }
-
+    
     
 }

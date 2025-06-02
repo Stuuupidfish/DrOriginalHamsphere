@@ -31,7 +31,7 @@ public class HealthBar : MonoBehaviour
             Debug.LogError("HealthClass (hp) is not assigned in PlayerController!");
             return;
         }
-        startHealth = playerController.hp.Health;  // Get the player's starting health
+        startHealth = playerController.maxHealth;  // Get the player's starting health
         currentHealth = startHealth;
         textMeshPro.text = currentHealth.ToString() + "/" + startHealth.ToString();
     }

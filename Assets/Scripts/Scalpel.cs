@@ -61,20 +61,4 @@ public class Scalpel : MonoBehaviour
 
         }
     }
-
-    // private Vector2 scalpelDir()
-    // {
-    //     Vector2 scalpelDirection = new Vector2(0,0);
-    //     if (Input.GetKey(KeyCode.UpArrow))
-    //         scalpelDirection.y += 1;
-    //     if (Input.GetKey(KeyCode.DownArrow))
-    //         scalpelDirection.y -= 1;
-    //     if (Input.GetKey(KeyCode.RightArrow))
-    //         scalpelDirection.x += 1;
-    //     if (Input.GetKey(KeyCode.LeftArrow))
-    //         scalpelDirection.x -= 1;
-    //     if (scalpelDirection.x == 0 && scalpelDirection.y == 0)
-    //         scalpelDirection = new Vector2(GetComponent<PlayerController>().direction, 0);
-    //     return scalpelDirection;
-    // }
 }
