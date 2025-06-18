@@ -16,8 +16,15 @@ public class Check : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.transform.tag == "ground") {
-
-            transform.parent.GetComponent<PlayerController>().ground = true;
+            if (transform.parent.GetComponent<PlayerController>().ground1) {
+                transform.parent.GetComponent<PlayerController>().ground2 = true;
+            }
+            else
+            {
+                transform.parent.GetComponent<PlayerController>().ground1 = true; 
+            }
+            //figure out how to do two 
+            //have two variables, jump if one of them is true. if collision is entered, make one true. on exit, set one to false. 
             //Debug.Log("grounded");
         }
     }
@@ -25,8 +32,14 @@ public class Check : MonoBehaviour
     {
         if (col.transform.tag == "ground")
         {
-
-            transform.parent.GetComponent<PlayerController>().ground = false;
+            if (!transform.parent.GetComponent<PlayerController>().ground1)
+            {
+                transform.parent.GetComponent<PlayerController>().ground2 = false;
+            }
+            else
+            {
+                transform.parent.GetComponent<PlayerController>().ground1 = false;
+            }
             //D//ebug.Log("Ungrounded");
         }
     }

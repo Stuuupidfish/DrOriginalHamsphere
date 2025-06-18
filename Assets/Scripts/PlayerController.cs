@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public PlayerMachine machine;
     public int speed = 5;
     public bool ground;
+    public bool ground1;
+    public bool ground2;
     public int jumpForce;
     public float jumpFrame = 0;
     public HealthClass hp;
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        ground = ground1 || ground2;
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
             speed = 10;
@@ -70,6 +73,8 @@ public class PlayerController : MonoBehaviour
         if (((jumpFrame > 0 && Input.GetKey(KeyCode.Z)) || Input.GetKeyDown(KeyCode.Z)) && ground)
         {
             ground = false;
+            ground1 = false;
+            ground2 = false;
             machine.Transition(machine.air);
         }
         if (Input.GetKeyDown(KeyCode.X) && canTurn)
