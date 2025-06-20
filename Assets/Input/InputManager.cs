@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 //excuse the weird naming conventions im first learning this off a tutorial
 
+//ok ive decided to scrap this but imma leave the script in case
+
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance;

@@ -35,7 +35,7 @@ public class TestEnemy : MonoBehaviour
     }
     
     void OnCollisionEnter2D(Collision2D col) {
-        Debug.Log(col.gameObject.tag);
+        //Debug.Log(col.gameObject.tag);
         if (col.gameObject.tag == "enemykill" || col.gameObject.tag == "scalpel")
         {
             hp.takeDamage(2);

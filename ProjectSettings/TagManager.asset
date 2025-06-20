@@ -9,6 +9,7 @@ TagManager:
   - enemy
   - enemykill
   - scalpel
+  - item
   layers:
   - Default
   - TransparentFX

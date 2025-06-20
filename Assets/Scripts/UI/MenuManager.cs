@@ -9,24 +9,34 @@ using UnityEngine.EventSystems;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenuCanvasGO;
-    [SerializeField] private GameObject _settingsMenuCanvasGO;
+    [SerializeField] private GameObject settingsMenuCanvasGO;
+
+    [SerializeField] private GameObject inventoryGO;
 
     //button scrolling 
-    [SerializeField] private GameObject _journalFirst;
+    [SerializeField] private GameObject journalButton;
+    [SerializeField] private GameObject mapButton;
+    [SerializeField] private GameObject loadButton;
+    [SerializeField] private GameObject inventoryButton;
+    [SerializeField] private GameObject settingsButton;
+
+    [SerializeField] private GameObject returnToTitleButton;
 
     //[SerializeField] private GameObject _settingsMenuFirst;
     //probably dont need this ^^^
-
+    private GameObject previousButton;
 
     private bool isPaused;
     private void Start()
     {
         _mainMenuCanvasGO.SetActive(false);
-        _settingsMenuCanvasGO.SetActive(false);
+        settingsMenuCanvasGO.SetActive(false);
+        inventoryGO.SetActive(false);
     }
     private void Update()
     {
-        if (InputManager.instance.MenuOpenCloseInput)
+        if (Input.GetKeyDown(KeyCode.Escape))//(InputManager.instance.MenuOpenCloseInput)
+        //im scrapping the tutorial's new input system bcuz its too much for me to think abt
         {
             if (!isPaused)
             {
@@ -45,6 +55,19 @@ public class MenuManager : MonoBehaviour
             {
                 // Simulate button press
                 ExecuteEvents.Execute<IPointerClickHandler>(selected, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+                previousButton = selected;
+            }
+        }
+        if (isPaused && Input.GetKeyDown(KeyCode.X))
+        {
+            // Simulate back button press
+            if (previousButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(previousButton);
+            }
+            else
+            {
+                OpenMainMenu();
             }
         }
     }
@@ -64,19 +87,25 @@ public class MenuManager : MonoBehaviour
     private void OpenMainMenu()
     {
         _mainMenuCanvasGO.SetActive(true);
-        _settingsMenuCanvasGO.SetActive(false);
+        settingsMenuCanvasGO.SetActive(false);
+        inventoryGO.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(_journalFirst);
+        EventSystem.current.SetSelectedGameObject(journalButton);
     }
     private void CloseAllMenus()
     {
         _mainMenuCanvasGO.SetActive(false);
-        _settingsMenuCanvasGO.SetActive(false);
+        settingsMenuCanvasGO.SetActive(false);
+        inventoryGO.SetActive(false);
     }
 
     public void OnSettingsPress()
     {
         OpenSettingsMenuHandle();
+    }
+    public void OnInventoryPress()
+    {
+        OpenInventory();
     }
     // public void OnResumePress()
     // {
@@ -86,10 +115,22 @@ public class MenuManager : MonoBehaviour
 
     private void OpenSettingsMenuHandle()
     {
-        _settingsMenuCanvasGO.SetActive(true);
+        settingsMenuCanvasGO.SetActive(true);
+
+        inventoryGO.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(returnToTitleButton);
+
+
 
         //_mainMenuCanvasGO.SetActive(false);
         //I AM NOT INCLUDING THIS PART OF TUTORIAL ^^^
+    }
+    private void OpenInventory()
+    {
+        inventoryGO.SetActive(true);
+
+        settingsMenuCanvasGO.SetActive(false);
     }
 
     // public void OnSettingsBackPress()
