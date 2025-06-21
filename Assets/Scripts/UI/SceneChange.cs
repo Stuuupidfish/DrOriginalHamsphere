@@ -20,6 +20,10 @@ public class SceneChange : MonoBehaviour
     {
         //NOT DONE
     }
+    public void returnToTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
     void Start()
     {
         
