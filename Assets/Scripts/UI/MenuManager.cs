@@ -8,33 +8,49 @@ using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _mainMenuCanvasGO;
+
+    [SerializeField] private GameObject mainMenuCanvasGO;
+    #region MAIN BUTTON CANVAS GAME OBJECTS
     [SerializeField] private GameObject settingsMenuCanvasGO;
-
     [SerializeField] private GameObject inventoryGO;
+    [SerializeField] private GameObject journalCanvasGO;
+    [SerializeField] private GameObject mapCanvasGO;
+    [SerializeField] private GameObject loadCanvasGO;
+    #endregion
 
-    //button scrolling 
+    #region MAIN AND SUB-BUTTONS
     [SerializeField] private GameObject journalButton;
+    [SerializeField] private GameObject questsButton;
+    [SerializeField] private GameObject acheivementsButton;
+    [SerializeField] private GameObject bestiaryButton;
     [SerializeField] private GameObject mapButton;
+
     [SerializeField] private GameObject loadButton;
+
     [SerializeField] private GameObject inventoryButton;
+
     [SerializeField] private GameObject settingsButton;
-
     [SerializeField] private GameObject returnToTitleButton;
+    #endregion
 
-    //[SerializeField] private GameObject _settingsMenuFirst;
-    //probably dont need this ^^^
+
     private GameObject previousButton;
-
     private bool isPaused;
+    private GameObject lastPreviewedButton;
+
     private void Start()
     {
-        _mainMenuCanvasGO.SetActive(false);
+        mainMenuCanvasGO.SetActive(false);
+
         settingsMenuCanvasGO.SetActive(false);
         inventoryGO.SetActive(false);
+        journalCanvasGO.SetActive(false);
+        mapCanvasGO.SetActive(false);
+        loadCanvasGO.SetActive(false);
     }
     private void Update()
     {
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
         if (Input.GetKeyDown(KeyCode.Escape))//(InputManager.instance.MenuOpenCloseInput)
         //im scrapping the tutorial's new input system bcuz its too much for me to think abt
         {
@@ -47,17 +63,62 @@ public class MenuManager : MonoBehaviour
                 Unpause();
             }
         }
-
-        if (isPaused && Input.GetKeyDown(KeyCode.Z))
+        if (selected != null && selected != lastPreviewedButton)
         {
-            GameObject selected = EventSystem.current.currentSelectedGameObject;
-            if (selected != null)
+            // Update the last previewed button
+            lastPreviewedButton = selected;
+            if (selected == journalButton)
             {
-                // Simulate button press
-                ExecuteEvents.Execute<IPointerClickHandler>(selected, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
-                previousButton = selected;
+                OpenJournal();
+            }
+            else if (selected == inventoryButton)
+            {
+                OpenInventory();
+            }
+            else if (selected == mapButton)
+            {
+                OpenMap();
+            }
+            else if (selected == loadButton)
+            {
+                OpenLoad();
+            }
+            else if (selected == settingsButton)
+            {
+                OpenSettingsMenuHandle();
             }
         }
+        
+        if (isPaused && Input.GetKeyDown(KeyCode.Z))
+            {
+                if (selected != null)
+                {
+                    // Simulate button press
+                    ExecuteEvents.Execute<IPointerClickHandler>(selected, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+                    if (selected == journalButton)
+                    {
+                        previousButton = selected;
+                    }
+                    else if (selected == mapButton)
+                    {
+                        previousButton = selected;
+                    }
+                    else if (selected == loadButton)
+                    {
+                        previousButton = selected;
+                    }
+                    else if (selected == inventoryButton)
+                    {
+                        previousButton = selected;
+                    }
+                    else if (selected == settingsButton)
+                    {
+                        previousButton = selected;
+                    }
+                }
+
+            }
+        
         if (isPaused && Input.GetKeyDown(KeyCode.X))
         {
             // Simulate back button press
@@ -71,7 +132,7 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
-
+    #region PAUSE AND UNPAUSE METHODS 
     private void Pause()
     {
         Time.timeScale = 0;
@@ -84,58 +145,109 @@ public class MenuManager : MonoBehaviour
         isPaused = false;
         CloseAllMenus();
     }
+    #endregion
+
     private void OpenMainMenu()
     {
-        _mainMenuCanvasGO.SetActive(true);
+        mainMenuCanvasGO.SetActive(true);
+
         settingsMenuCanvasGO.SetActive(false);
         inventoryGO.SetActive(false);
+        mapCanvasGO.SetActive(false);
+        loadCanvasGO.SetActive(false);
+
+        journalCanvasGO.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(journalButton);
     }
     private void CloseAllMenus()
     {
-        _mainMenuCanvasGO.SetActive(false);
+        mainMenuCanvasGO.SetActive(false);
+
         settingsMenuCanvasGO.SetActive(false);
         inventoryGO.SetActive(false);
+        journalCanvasGO.SetActive(false);
+        mapCanvasGO.SetActive(false);
+        loadCanvasGO.SetActive(false);
     }
-
+    #region BUTTON PRESS METHODS
     public void OnSettingsPress()
     {
         OpenSettingsMenuHandle();
+        EventSystem.current.SetSelectedGameObject(returnToTitleButton);
     }
     public void OnInventoryPress()
     {
         OpenInventory();
     }
-    // public void OnResumePress()
-    // {
-    //     Unpause();
-    // }
-    //I ALSO MIGHT NOT NEED THIS BUT IM KEEPING EVERYTHING IN CASE ^^^
+    public void OnJournalPress()
+    {
+        OpenJournal();
+        EventSystem.current.SetSelectedGameObject(questsButton);
+    }
+    public void OnMapPress()
+    {
+        OpenMap();
+    }
+    public void OnLoadPress()
+    {
+        OpenLoad();
+    }
+    #endregion
 
+
+#region OPEN MENU PAGES METHODS
     private void OpenSettingsMenuHandle()
     {
         settingsMenuCanvasGO.SetActive(true);
 
+        journalCanvasGO.SetActive(false);
+        mapCanvasGO.SetActive(false);
+        loadCanvasGO.SetActive(false);
         inventoryGO.SetActive(false);
-
-        EventSystem.current.SetSelectedGameObject(returnToTitleButton);
-
-
-
-        //_mainMenuCanvasGO.SetActive(false);
-        //I AM NOT INCLUDING THIS PART OF TUTORIAL ^^^
     }
     private void OpenInventory()
     {
         inventoryGO.SetActive(true);
 
+        journalCanvasGO.SetActive(false);
+        mapCanvasGO.SetActive(false);
+        loadCanvasGO.SetActive(false);
         settingsMenuCanvasGO.SetActive(false);
-    }
 
-    // public void OnSettingsBackPress()
-    // {
-    //     OpenMainMenu();
-    // }
-    //I might not use this method either ^^
+        //other stuff to do with inventory will b implemented later
+    }
+    private void OpenJournal()
+    {
+        journalCanvasGO.SetActive(true);
+
+        settingsMenuCanvasGO.SetActive(false);
+        mapCanvasGO.SetActive(false);
+        loadCanvasGO.SetActive(false);
+        inventoryGO.SetActive(false);
+    }
+    private void OpenMap()
+    {
+        mapCanvasGO.SetActive(true);
+
+        journalCanvasGO.SetActive(false);
+        settingsMenuCanvasGO.SetActive(false);
+        loadCanvasGO.SetActive(false);
+        inventoryGO.SetActive(false);
+
+        //other stuff to do with map will b implemented later
+    }
+    private void OpenLoad()
+    {
+        loadCanvasGO.SetActive(true);
+
+        journalCanvasGO.SetActive(false);
+        settingsMenuCanvasGO.SetActive(false);
+        mapCanvasGO.SetActive(false);
+        inventoryGO.SetActive(false);
+
+        //other stuff to do with load will b implemented later
+    }
+    
+#endregion
 }
