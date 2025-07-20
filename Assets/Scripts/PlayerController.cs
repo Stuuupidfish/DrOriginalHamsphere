@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
                  //Debug.Log("turn on iFrames");
                 hp.ITime = hp.MaxIframes;
                 hp.Invincible = true;
-                hp.takeDamage(10);
+                hp.takeDamage(collision.gameObject.GetComponent<EnemyProperties>().damage);
                 //fix ^
                 int dir = rb2d.position.x < collision.gameObject.GetComponent<Rigidbody2D>().position.x ? -1 : 1;
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);

@@ -9,7 +9,7 @@ public class SceneChange : MonoBehaviour
 
     public void SwitchSceneStomach()
     {
-        SceneManager.LoadScene("MouthEsophagus");
+        SceneManager.LoadScene("ME1");
     }
     public void quit()
     {
