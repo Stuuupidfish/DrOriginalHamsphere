@@ -6,7 +6,7 @@ public class BulletJuice : MonoBehaviour
 {
     float t;
     void Start() {
-        Debug.Log(transform.position.x + " " + transform.position.y);
+        //Debug.Log(transform.position.x + " " + transform.position.y);
         t = 1000;
     }
     void Update() {
