@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7779944664224815902}
   - component: {fileID: 5333615913603604682}
   - component: {fileID: 9135116015452802928}
+  - component: {fileID: 5420688665083693511}
   m_Layer: 6
   m_Name: TestEnemy (flying)
   m_TagString: enemy
@@ -202,3 +203,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8d3bd0f711d8c42acf08bf3347492a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5420688665083693511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789161415426099257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac84a456e3a26674282fdab9c782956c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10

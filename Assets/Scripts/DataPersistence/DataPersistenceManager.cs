@@ -6,6 +6,7 @@ public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File storage config")]
     [SerializeField] private string fileName = "";
+    [SerializeField] private bool useEncryption = false;
 
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
@@ -24,7 +25,7 @@ public class DataPersistenceManager : MonoBehaviour
     }
     private void Start()
     {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
@@ -45,6 +46,7 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObject.LoadData(gameData); // Load data for each IDataPersistence object
         }
+        Debug.Log("Loaded currency: " + gameData.currencyCount);
 
     }
     public void SaveGame()

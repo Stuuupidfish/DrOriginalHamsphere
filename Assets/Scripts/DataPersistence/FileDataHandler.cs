@@ -9,10 +9,17 @@ public class FileDataHandler
     private string dataFilePath = "";
     private string dataFileName = "";
 
-    public FileDataHandler(string dataFilePath, string dataFileName)
+    private bool useEncryption = false;
+    private readonly string encryptionCodeWord = "bug";
+
+
+
+
+    public FileDataHandler(string dataFilePath, string dataFileName, bool useEncryption)
     {
         this.dataFilePath = dataFilePath;
         this.dataFileName = dataFileName;
+        this.useEncryption = useEncryption;
     }
 
     public GameData Load()
@@ -33,6 +40,13 @@ public class FileDataHandler
                         dataToLoad = reader.ReadToEnd();
                     }
                 }
+
+                // If encryption is enabled, decrypt the data
+                if (useEncryption)
+                {
+                    dataToLoad = EncryptDecrypt(dataToLoad);
+                }
+                
                 // Deserialize the JSON data to GameData object
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
             }
@@ -55,14 +69,20 @@ public class FileDataHandler
             // Serialize the game data to JSON
             string dataToStore = JsonUtility.ToJson(gameData, true);
 
-            // Write the JSON data to the file
-            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+            // If encryption is enabled, encrypt the data
+            if (useEncryption)
             {
-                using (StreamWriter writer = new StreamWriter(stream))
-                {
-                    writer.Write(dataToStore);
-                }
+                dataToStore = EncryptDecrypt(dataToStore);
             }
+
+            // Write the JSON data to the file
+                using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    using (StreamWriter writer = new StreamWriter(stream))
+                    {
+                        writer.Write(dataToStore);
+                    }
+                }
 
         }
         catch (Exception e)
@@ -70,4 +90,21 @@ public class FileDataHandler
             Debug.LogError("Failed to save data to:" + fullPath + "\n" + e);
         }
     }
+
+
+
+
+    private string EncryptDecrypt(string data)
+    {
+        string modifiedData = "";
+        for (int i = 0; i < data.Length; i++)
+        {
+            modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
+        }
+        return modifiedData;
+    }
+    
+
+
+
 }

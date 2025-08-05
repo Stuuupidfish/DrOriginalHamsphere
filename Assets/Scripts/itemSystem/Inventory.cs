@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
 {
     // Start is called before the first frame update
     public TextMeshProUGUI textMeshPro;
-    public int currency = 0;
+    public static int currency;
 
     private int maxCurrency = 9999;
     private int maxInventorySize = 8;
@@ -17,13 +17,13 @@ public class Inventory : MonoBehaviour, IDataPersistence
     [SerializeField] private Item[][] inventory;
 
 
-    public void LoadData(GameData gameData)
+    public void LoadData(GameData data)
     {
-        currency = gameData.currencyCount; // Load the currency count from the game data
+        currency = data.currencyCount; // Load the currency count from the game data
     }
-    public void SaveData(ref GameData gameData)
+    public void SaveData(ref GameData data)
     {
-        gameData.currencyCount = currency; // Save the current currency count to the game data
+        data.currencyCount = currency; // Save the current currency count to the game data
         Debug.Log("Saving currency: " + currency);
     }
 
@@ -37,12 +37,17 @@ public class Inventory : MonoBehaviour, IDataPersistence
             textMeshPro = GameObject.Find("LightCountText").GetComponent<TextMeshProUGUI>();
         }
         textMeshPro.text = currency.ToString();
+        Debug.Log("Starting currency: " + currency);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        // Update the UI text element with the current currency value
+        if (textMeshPro != null)
+        {
+            textMeshPro.text = currency.ToString();
+        }
     }
     public void AddCurrency(int amount)
     {
@@ -51,8 +56,6 @@ public class Inventory : MonoBehaviour, IDataPersistence
         {
             currency = maxCurrency;
         }
-        textMeshPro.text = currency.ToString();
-
         Debug.Log("Currency added: " + amount + ", Total currency: " + currency);
     }
 

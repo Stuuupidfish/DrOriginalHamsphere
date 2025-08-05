@@ -10,7 +10,7 @@ using UnityEngine;
 // FIX STOPPING DURING SCALPEL [ok so now theres a chance that hamsphere will start sliding]
 // ADD SCALPEL DIRECTIONS
 // CREATE STOMACH BUG
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistence
 {
     private Rigidbody2D rb2d;
     public PlayerMachine machine;
@@ -29,7 +29,24 @@ public class PlayerController : MonoBehaviour
     public float direction;
     int scalpelCooldown;
 
-     void Start()
+
+
+
+    public void LoadData(GameData data)
+    {
+        transform.position = data.playerPosition; // Load player position from game data
+        hp.Health = data.health; // Load player health from game data
+    }
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = new Vector2(transform.position.x, transform.position.y); //save player position
+        data.health = hp.Health; // Save player health to game data
+    }
+
+
+
+
+    void Start()
     {
 
 

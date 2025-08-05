@@ -12,20 +12,14 @@ public class XmasLight : MonoBehaviour
     private bool isCollected = false; // To prevent multiple collections
     void Start()
     {
-        inventory = FindObjectOfType<Inventory>(); // Get the Inventory component
-                                                   //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Item"), true);
-                                                   // if (textMeshPro == null)
-                                                   // {
-                                                   //     textMeshPro = GameObject.Find("LightCountText").GetComponent<TextMeshProUGUI>();
-                                                   // }
-                                                   // textMeshPro.text = lightCount.ToString();
+        inventory = FindObjectOfType<Inventory>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void OnCollisionEnter2D(Collision2D col)

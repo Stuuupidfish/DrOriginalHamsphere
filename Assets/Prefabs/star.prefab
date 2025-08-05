@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8051865282971462303}
   - component: {fileID: 3860406685458113844}
   - component: {fileID: 6322258329276522638}
+  - component: {fileID: 3898905821539404421}
   m_Layer: 6
   m_Name: star
   m_TagString: enemy
@@ -202,3 +203,16 @@ MonoBehaviour:
   enemyHealth: 1000
   changeVel: 0
   player: {fileID: 0}
+--- !u!114 &3898905821539404421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216153859588990287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac84a456e3a26674282fdab9c782956c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
