@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private GameObject mainMenuCanvasGO;
     #region MAIN BUTTON CANVAS GAME OBJECTS
+    [Header("Main Button Canvas Game Objects")]
     [SerializeField] private GameObject settingsMenuCanvasGO;
     [SerializeField] private GameObject inventoryGO;
     [SerializeField] private GameObject journalCanvasGO;
@@ -19,6 +20,7 @@ public class MenuManager : MonoBehaviour
     #endregion
 
     #region MAIN AND SUB-BUTTONS
+    [Header("Main and Sub-Buttons")]
     [SerializeField] private GameObject journalButton;
     [SerializeField] private GameObject questsButton;
     [SerializeField] private GameObject acheivementsButton;
@@ -31,11 +33,12 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private GameObject settingsButton;
     [SerializeField] private GameObject returnToTitleButton;
+    [SerializeField] private GameObject topLoadButton;
     #endregion
 
 
     private GameObject previousButton;
-    private bool isPaused;
+    public bool isPaused;
     private GameObject lastPreviewedButton;
 
     private void Start()
@@ -192,6 +195,7 @@ public class MenuManager : MonoBehaviour
     public void OnLoadPress()
     {
         OpenLoad();
+        EventSystem.current.SetSelectedGameObject(topLoadButton);
     }
     #endregion
 

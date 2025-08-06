@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using UnityEditor;
 using UnityEngine;
 
 // IN ORDER OF IMPORTANCE:
@@ -28,8 +29,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public GameObject scalpel; // set cooldown after bullets, until scalpel can hit again
     public float direction;
     int scalpelCooldown;
-
-
+    
+    private bool isPaused = false;
 
 
     public void LoadData(GameData data)
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     void Start()
     {
-
+        isPaused = FindObjectOfType<MenuManager>().isPaused;
 
         machine = new PlayerMachine(this);
         rb2d = GetComponent<Rigidbody2D>();
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     }
     void Update()
     {
+        isPaused = FindObjectOfType<MenuManager>().isPaused;
         ground = ground1 || ground2;
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
@@ -87,14 +89,14 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         {
             jumpFrame -= 190 * Time.fixedDeltaTime;
         }
-        if (((jumpFrame > 0 && Input.GetKey(KeyCode.Z)) || Input.GetKeyDown(KeyCode.Z)) && ground)
+        if (!isPaused && ((jumpFrame > 0 && Input.GetKey(KeyCode.Z)) || Input.GetKeyDown(KeyCode.Z)) && ground)
         {
             ground = false;
             ground1 = false;
             ground2 = false;
             machine.Transition(machine.air);
         }
-        if (Input.GetKeyDown(KeyCode.X) && canTurn)
+        if (!isPaused && Input.GetKeyDown(KeyCode.X) && canTurn)
         {
             Instantiate(scalpel, this.transform);
             canTurn = false;
