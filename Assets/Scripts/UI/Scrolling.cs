@@ -5,9 +5,16 @@ using UnityEngine.UI;
 
 public class Scrolling : MonoBehaviour
 {
-    [SerializeField] private float scrollSpeed = 1f;
     [SerializeField] private ScrollRect scrollRect;
+    private RectTransform contentRect;
+    private RectTransform viewportRect;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        contentRect = scrollRect.content;
+        viewportRect = scrollRect.viewport;
+    }
     void Start()
     {
         
@@ -18,13 +25,11 @@ public class Scrolling : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            scrollRect.verticalNormalizedPosition += scrollSpeed * Time.deltaTime;
-            Debug.Log("Scroll up");
+            
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            scrollRect.verticalNormalizedPosition -= scrollSpeed * Time.deltaTime;
-            Debug.Log("Scroll down");
+            
         }
     }
 }
