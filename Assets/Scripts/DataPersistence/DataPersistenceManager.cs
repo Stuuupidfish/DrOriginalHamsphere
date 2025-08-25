@@ -55,7 +55,7 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObject.SaveData(ref gameData); // Save data for each IDataPersistence object
         }
-        Debug.Log("saved currency: " + gameData.currencyCount);
+        //Debug.Log("saved currency: " + gameData.currencyCount);
         dataHandler.Save(gameData); // Save the game data to file
         Debug.Log("Game data saved to " + Application.persistentDataPath);
     }
@@ -64,10 +64,10 @@ public class DataPersistenceManager : MonoBehaviour
 
     //IM PROBABLY GONNA REMOVE THIS IN THE FUTURE SINCE I WANT SLOT SAVES
     //THIS IS FOR TESTING
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
+    // private void OnApplicationQuit()
+    // {
+    //     SaveGame();
+    // }
 
 
 

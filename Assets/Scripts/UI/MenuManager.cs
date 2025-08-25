@@ -40,9 +40,11 @@ public class MenuManager : MonoBehaviour
     private GameObject previousButton;
     public bool isPaused;
     private GameObject lastPreviewedButton;
+    
 
     private void Start()
     {
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
         mainMenuCanvasGO.SetActive(false);
 
         settingsMenuCanvasGO.SetActive(false);
