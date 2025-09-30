@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 3276069781640461238}
   - component: {fileID: 440081406078753363}
   - component: {fileID: 1439117040820196112}
+  - component: {fileID: 8766856733049229780}
   - component: {fileID: -8009151076394852204}
   m_Layer: 3
   m_Name: DrHamsphere
@@ -341,6 +342,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &8766856733049229780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480763097861664068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98dfa7f68b3daa44baa2778dc66deb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 5624945266895359702, guid: 78c8c3653d822ba4a8041ddd22af26c6, type: 3}
 --- !u!114 &-8009151076394852204
 MonoBehaviour:
   m_ObjectHideFlags: 0

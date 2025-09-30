@@ -10,6 +10,7 @@ TagManager:
   - enemykill
   - scalpel
   - item
+  - door
   layers:
   - Default
   - TransparentFX

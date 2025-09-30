@@ -9,7 +9,7 @@ public class Init : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(player, PlayerDoor.door.getLocation(), Quaternion.identity);
+        //Instantiate(player, PlayerDoor.door.getLocation(), Quaternion.identity);
     }
 
     // Update is called once per frame

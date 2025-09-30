@@ -10,7 +10,7 @@ public class BossController : MonoBehaviour
     int speed;
     int health;
     public GameObject player;
-    BossMachine machine;
+    public BossMachine machine;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +31,15 @@ public class BossController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         machine.Update();
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (machine.current == machine.bossRamming)
+        {
+            machine.Transition(machine.bossIdle);
+        }
     }
 }

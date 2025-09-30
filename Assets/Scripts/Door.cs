@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public int num;
-    public Door connection;
-    public string scene;
+    public int num; // num of this door
+    public int connection; // num of connection
+    public string scene; // scene of connection
     public int exit; // 0= right, 1 = up, 2= left, 3=down
 
     // when player touches door, change scene and find numbered door, then launch out in that direction 
